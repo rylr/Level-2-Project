@@ -1,0 +1,33 @@
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class PromptWindow {
+	JFrame frame;
+	JPanel panel;
+	JTextField speedSet;
+	JLabel speedPrompt;
+	
+	public static void main(String[] args) {
+		PromptWindow r = new PromptWindow();
+	}
+
+	public PromptWindow()
+	{
+		frame = new JFrame("Set your speed");
+		panel = new JPanel();
+		speedSet = new JTextField(5);
+		speedPrompt = new JLabel("Set your word display speed here.");
+		
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+		frame.setSize(300, 200);
+		
+		frame.add(panel);
+		panel.add(frame);
+		panel.add(speedSet);
+		panel.add(speedPrompt);
+
+	}
+}
