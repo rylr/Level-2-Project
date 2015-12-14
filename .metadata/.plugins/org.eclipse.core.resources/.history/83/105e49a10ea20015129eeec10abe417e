@@ -4,7 +4,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -14,15 +13,13 @@ public class PromptWindow implements ActionListener{
 	JTextField speedSet;
 	JLabel speedInfo;
 	JButton speedConfirm;
-	JButton fileBrowse;
-	JButton run;
 	
 	public static void main(String[] args) {
 		PromptWindow r = new PromptWindow();
 	}
 
 	public PromptWindow() {
-		//Speed
+		//GUI
 		frame = new JFrame("Set your speed");
 		panel = new JPanel();
 		speedSet = new JTextField(5);
@@ -41,32 +38,11 @@ public class PromptWindow implements ActionListener{
 		speedInfo.setText("Set the word display speed here.");
 		
 		speedConfirm.addActionListener(this);
-	
-		//File Browser
-		fileBrowse = new JButton();
-		
-		fileBrowse.addActionListener(this);
-		
-		
-		//Run Button
-		run = new JButton();
-		
-		run.addActionListener(this);
 	}
 	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == speedConfirm) {
 			int speed = Integer.parseInt(speedSet.getText());
-		}
-		
-		if(e.getSource() == fileBrowse) {
-			
-		}
-		
-		if(e.getSource() == run) {
-			if(speedSet.getText().equals("")) {
-				JOptionPane.showMessageDialog(null, "Set a speed for your text display.");
-			}
 		}
 	}
 }
