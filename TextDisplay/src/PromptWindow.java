@@ -2,6 +2,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -16,6 +17,7 @@ public class PromptWindow implements ActionListener{
 	JButton speedConfirm;
 	JButton fileBrowse;
 	JButton run;
+	JFileChooser doc;
 	
 	public static void main(String[] args) {
 		PromptWindow r = new PromptWindow();
@@ -31,7 +33,7 @@ public class PromptWindow implements ActionListener{
 		
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
-		frame.setSize(400, 60);
+		frame.setSize(525, 600);
 		
 		frame.add(panel);
 		panel.add(speedInfo);
@@ -41,15 +43,27 @@ public class PromptWindow implements ActionListener{
 		speedInfo.setText("Set the word display speed here.");
 		
 		speedConfirm.addActionListener(this);
+		
+		//speedSet.setBounds(450, 50, 30, 10);
 	
 		//File Browser
 		fileBrowse = new JButton();
+		doc = new JFileChooser();
+		panel.add(doc);
+		
 		
 		fileBrowse.addActionListener(this);
 		
+		doc.setCurrentDirectory(new java.io.File("C:/Users/Tyler/Desktop"));
+		doc.setDialogTitle("Text Document Chooser");
+		doc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+		
+		//System.out.println("You chose: " +doc.getSelectedFile().getAbsolutePath());
+		
 		
 		//Run Button
-		run = new JButton();
+		run = new JButton("Run");
+		panel.add(run);
 		
 		run.addActionListener(this);
 	}
