@@ -4,16 +4,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class DisplayWindow {
-	JFrame disframe;
-	JPanel dispanel;
+	JFrame frame;
+	JPanel panel;
 	
 	public DisplayWindow()
 	{
-		disframe = new JFrame();
-		disframe.setVisible(true);
-		disframe.setSize(400, 800);
-		dispanel = new JPanel();
+		frame = new JFrame();
+		panel = new JPanel();
 		
-		disframe.add(dispanel);
+		frame.add(panel);
 	}
 }

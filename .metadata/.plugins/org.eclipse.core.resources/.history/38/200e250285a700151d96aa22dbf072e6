@@ -1,6 +1,5 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -19,8 +18,6 @@ public class PromptWindow implements ActionListener{
 	JButton fileBrowse;
 	JButton run;
 	JFileChooser doc;
-	File file;
-	FileReader fr;
 	
 	public static void main(String[] args) {
 		PromptWindow r = new PromptWindow();
@@ -36,7 +33,7 @@ public class PromptWindow implements ActionListener{
 		
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
-		frame.setSize(600, 100);
+		frame.setSize(525, 600);
 		
 		frame.add(panel);
 		panel.add(speedInfo);
@@ -61,10 +58,6 @@ public class PromptWindow implements ActionListener{
 		doc.setDialogTitle("Text Document Chooser");
 		doc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 		
-		if(doc.showOpenDialog(doc) == JFileChooser.APPROVE_OPTION) {
-			file = doc.getSelectedFile();
-		}
-		
 		//System.out.println("You chose: " +doc.getSelectedFile().getAbsolutePath());
 		
 		
@@ -73,30 +66,6 @@ public class PromptWindow implements ActionListener{
 		panel.add(run);
 		
 		run.addActionListener(this);
-		
-		//File Reader
-		String x = FileReader.getFile(file);
-		System.out.println(x);
-		
-		
-		
-		//Display - Move somewhere else
-				String x = "";
-				
-				for (int i = 0; i < text.length; i++) 
-				{
-					if(text.charAt(i) == " ")
-					{
-						//print words on DisplayWindow
-						x = "";
-					}
-					else
-					{
-						x += text.chatAt(i);
-					}
-				}
-		
-		
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -109,8 +78,6 @@ public class PromptWindow implements ActionListener{
 		}
 		
 		if(e.getSource() == run) {
-			DisplayWindow dw = new DisplayWindow();
-			
 			if(speedSet.getText().equals("")) {
 				JOptionPane.showMessageDialog(null, "Set a speed for your text display.");
 			}

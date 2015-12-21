@@ -10,8 +10,6 @@ public class DisplayWindow {
 	public DisplayWindow()
 	{
 		disframe = new JFrame();
-		disframe.setVisible(true);
-		disframe.setSize(400, 800);
 		dispanel = new JPanel();
 		
 		disframe.add(dispanel);

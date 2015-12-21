@@ -1,0 +1,15 @@
+import java.io.BufferedReader;
+import java.io.File;
+
+
+public class FileReader {
+	
+	BufferedReader bufferedReader;
+	
+	public FileReader(File f) {
+		
+		reader = new FileReader(f);
+		
+		bufferedReader = new BufferedReader(reader);
+	}
+}
