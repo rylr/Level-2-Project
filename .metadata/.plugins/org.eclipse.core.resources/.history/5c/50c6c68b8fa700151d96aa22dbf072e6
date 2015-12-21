@@ -8,14 +8,13 @@ public class FileReader {
 	
 	BufferedReader bufferedReader;
 	
-	public static String getFile(File f) {
-		String output = "";
+	public FileReader(File f) {
 		try {
-			output = new Scanner(f).useDelimiter("\\z").next();
-			System.out.println(output);
+			String text = new Scanner(f).useDelimiter("\\z").next();
+			System.out.println(text);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		return output;
+		
 	}
 }
