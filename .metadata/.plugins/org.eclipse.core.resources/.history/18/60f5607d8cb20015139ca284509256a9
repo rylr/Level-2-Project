@@ -1,0 +1,34 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.Timer;
+
+public class DisplayWindow implements ActionListener{
+	JFrame disframe;
+	JPanel dispanel;
+	ArrayList<String> wordList;
+	Timer timer;
+	public DisplayWindow(ArrayList<String> x, int y)
+	{
+		wordList = x;
+		disframe = new JFrame();
+		disframe.setVisible(true);
+		disframe.setSize(400, 800);
+		dispanel = new JPanel();
+		
+		disframe.add(dispanel);
+		
+		timer = new Timer((1000/y) * 60, this);
+		timer.start();
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println("hi");
+	}
+}

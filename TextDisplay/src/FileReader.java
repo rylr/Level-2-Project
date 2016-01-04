@@ -12,7 +12,6 @@ public class FileReader {
 		String output = "";
 		try {
 			output = new Scanner(f).useDelimiter("\\z").next();
-			System.out.println(output);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

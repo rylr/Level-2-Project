@@ -1,0 +1,19 @@
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class DisplayWindow {
+	JFrame disframe;
+	JPanel dispanel;
+	
+	public DisplayWindow()
+	{
+		disframe = new JFrame();
+		disframe.setVisible(true);
+		disframe.setSize(400, 800);
+		dispanel = new JPanel();
+		
+		disframe.add(dispanel);
+	}
+}

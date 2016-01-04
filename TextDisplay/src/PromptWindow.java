@@ -1,6 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -21,6 +22,9 @@ public class PromptWindow implements ActionListener{
 	JFileChooser doc;
 	File file;
 	FileReader fr;
+	ArrayList<String> words;
+	DisplayWindow window;
+	int speed;
 	
 	public static void main(String[] args) {
 		PromptWindow r = new PromptWindow();
@@ -36,7 +40,7 @@ public class PromptWindow implements ActionListener{
 		
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
-		frame.setSize(600, 100);
+		
 		
 		frame.add(panel);
 		panel.add(speedInfo);
@@ -48,12 +52,18 @@ public class PromptWindow implements ActionListener{
 		speedConfirm.addActionListener(this);
 		
 		//speedSet.setBounds(450, 50, 30, 10);
+		
+		//Run Button
+		run = new JButton("Run");
+		panel.add(run);
+		frame.setSize(600, 100);
+				
+		run.addActionListener(this);
 	
 		//File Browser
 		fileBrowse = new JButton();
 		doc = new JFileChooser();
 		panel.add(doc);
-		
 		
 		fileBrowse.addActionListener(this);
 		
@@ -67,49 +77,43 @@ public class PromptWindow implements ActionListener{
 		
 		//System.out.println("You chose: " +doc.getSelectedFile().getAbsolutePath());
 		
-		
-		//Run Button
-		run = new JButton("Run");
-		panel.add(run);
-		
-		run.addActionListener(this);
-		
 		//File Reader
-		String x = FileReader.getFile(file);
-		System.out.println(x);
-		
-		
+		String text = FileReader.getFile(file);
+		System.out.println(text);
 		
 		//Display - Move somewhere else
-				String x = "";
+		words = new ArrayList<String>();
+		String distext = "";
 				
-				for (int i = 0; i < text.length; i++) 
+			for (int i = 0; i < text.length(); i++) 
+			{
+				if(text.charAt(i) == ' '||i == text.length() - 1)
 				{
-					if(text.charAt(i) == " ")
-					{
-						//print words on DisplayWindow
-						x = "";
-					}
-					else
-					{
-						x += text.chatAt(i);
-					}
+					//print words on DisplayWindow
+							
+					words.add(distext);
+					distext = "";
+						
 				}
-		
-		
+				else
+				{
+					distext += text.charAt(i);
+				}
+					
+			}
+				
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == speedConfirm) {
-			int speed = Integer.parseInt(speedSet.getText());
-		}
 		
 		if(e.getSource() == fileBrowse) {
 			
 		}
 		
 		if(e.getSource() == run) {
-			DisplayWindow dw = new DisplayWindow();
+			speed = Integer.parseInt(speedSet.getText());
+			
+			window = new DisplayWindow(words, speed);
 			
 			if(speedSet.getText().equals("")) {
 				JOptionPane.showMessageDialog(null, "Set a speed for your text display.");
