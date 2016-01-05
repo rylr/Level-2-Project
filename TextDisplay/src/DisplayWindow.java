@@ -1,3 +1,5 @@
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -6,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
 public class DisplayWindow implements ActionListener{
@@ -19,30 +22,39 @@ public class DisplayWindow implements ActionListener{
 	public DisplayWindow(ArrayList<String> x, int y)
 	{
 		wordList = x;
-		disframe = new JFrame();
-		disframe.setVisible(true);
-		disframe.setSize(400, 400);
-		dispanel = new JPanel();
 		
-		disframe.add(dispanel);
+		//GUI
+			disframe = new JFrame();
+			disframe.setVisible(true);
+			disframe.setSize(800, 400);
+			dispanel = new JPanel();
 		
-		currentWord = new JLabel(wordList.get(0));
-		dispanel.setLayout(null);
-		dispanel.add(currentWord);
-		currentWord.setBounds(190, 0, 400, 400);
+			disframe.add(dispanel);
 		
-		timer = new Timer((1000/y) * 60, this);
-		timer.start();
+		//Text Display	
+			currentWord = new JLabel(wordList.get(0));
+			//dispanel.setLayout(null);
+			dispanel.add(currentWord);
+			//currentWord.setBounds(190, 0, 400, 400);
+			
+		//Timer
+			timer = new Timer((1000/y) * 60, this);
+			timer.start();
+			
+		//Panel and Text Cosmetics
+			dispanel.setBackground(Color.BLACK);
+			currentWord.setForeground(Color.WHITE);
+			
+			//currentWord.setHorizontal(SwingConstants.CENTER);
+			currentWord.setVerticalAlignment( SwingConstants.CENTER );
+			
+			currentWord.setFont(new Font("Arial", Font.PLAIN, 80));
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(counter < wordList.size())
-		{
 			currentWord.setText(wordList.get(counter++));
-		}
 		else
-		{
 			System.exit(0);
-		}
 	}
 }

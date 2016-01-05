@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -11,13 +12,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class PromptWindow implements ActionListener{
+public class PromptWindow implements ActionListener {
 	JFrame frame;
 	JPanel panel;
 	JTextField speedSet;
 	JLabel speedInfo;
-	JButton speedConfirm;
-	JButton fileBrowse;
 	JButton run;
 	JFileChooser doc;
 	File file;
@@ -31,93 +30,71 @@ public class PromptWindow implements ActionListener{
 	}
 
 	public PromptWindow() {
-		//Speed
-		frame = new JFrame("Set your speed");
-		panel = new JPanel();
-		speedSet = new JTextField(5);
-		speedInfo = new JLabel();
-		speedConfirm = new JButton("Confirm");
+		//Speed and GUI
+			frame = new JFrame("Set your speed");
+			panel = new JPanel();
+			speedSet = new JTextField(5);
+			speedInfo = new JLabel();
 		
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+			frame.setVisible(true);
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
-		frame.add(panel);
-		panel.add(speedInfo);
-		panel.add(speedSet);
-		panel.add(speedConfirm);
+			frame.add(panel);
+			panel.add(speedInfo);
+			panel.add(speedSet);
 		
-		speedInfo.setText("Set the word display speed here.");
+			speedInfo.setText("Please set the word display speed in words per minute.");
 		
-		speedConfirm.addActionListener(this);
-		
-		//speedSet.setBounds(450, 50, 30, 10);
 		
 		//Run Button
-		run = new JButton("Run");
-		panel.add(run);
-		frame.setSize(600, 100);
-				
-		run.addActionListener(this);
+			run = new JButton("Run");
+			panel.add(run);
+			frame.setSize(600, 100);
+			
+			run.addActionListener(this);
 	
+			
 		//File Browser
-		fileBrowse = new JButton();
-		doc = new JFileChooser();
-		panel.add(doc);
+			doc = new JFileChooser();
+			panel.add(doc);
 		
-		fileBrowse.addActionListener(this);
+			doc.setCurrentDirectory(new java.io.File("C:/Users/Tyler/Desktop"));
+			doc.setDialogTitle("Text Document Chooser");
+			doc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 		
-		doc.setCurrentDirectory(new java.io.File("C:/Users/Tyler/Desktop"));
-		doc.setDialogTitle("Text Document Chooser");
-		doc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+			if(doc.showOpenDialog(doc) == JFileChooser.APPROVE_OPTION)
+				file = doc.getSelectedFile();
 		
-		if(doc.showOpenDialog(doc) == JFileChooser.APPROVE_OPTION) {
-			file = doc.getSelectedFile();
-		}
-		
-		//System.out.println("You chose: " +doc.getSelectedFile().getAbsolutePath());
+			System.out.println("You chose: " +doc.getSelectedFile().getAbsolutePath());
 		
 		//File Reader
-		String text = FileReader.getFile(file);
-		System.out.println(text);
+			String text = FileReader.getFile(file);
+			System.out.println(text);
 		
-		//Display - Move somewhere else
-		words = new ArrayList<String>();
-		String distext = "";
+		//Document Analyzer and Splitter
+			words = new ArrayList<String>();
+			String distext = "";
 				
-			for (int i = 0; i < text.length(); i++) 
-			{
-				if(text.charAt(i) == ' '||i == text.length() - 1)
-				{
-					//print words on DisplayWindow
-							
+			for (int i = 0; i < text.length(); i++) {
+				if(text.charAt(i) == ' '||i == text.length() - 1) {
 					words.add(distext);
 					distext = "";
-						
 				}
-				else
-				{
+				else {
 					distext += text.charAt(i);
-				}
-					
-			}
-				
+				}	
+			}	
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		
-		if(e.getSource() == fileBrowse) {
-			
-		}
-		
 		if(e.getSource() == run) {
 			speed = Integer.parseInt(speedSet.getText());
 			
 			window = new DisplayWindow(words, speed);
 			
-			if(speedSet.getText().equals("")) {
-				JOptionPane.showMessageDialog(null, "Set a speed for your text display.");
-			}
+			if(speedSet.getText().equals(""))
+				JOptionPane.showMessageDialog(null, "Please set a speed for your text display.");
 		}
 	}
 }
