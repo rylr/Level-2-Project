@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.FileDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -11,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 public class PromptWindow implements ActionListener {
 	JFrame frame;
@@ -18,7 +20,8 @@ public class PromptWindow implements ActionListener {
 	JTextField speedSet;
 	JLabel speedInfo;
 	JButton run;
-	JFileChooser doc;
+	//JFileChooser doc;
+	FileDialog fd;
 	File file;
 	FileReader fr;
 	ArrayList<String> words;
@@ -56,20 +59,32 @@ public class PromptWindow implements ActionListener {
 	
 			
 		//File Browser
+			/*
 			doc = new JFileChooser();
 			panel.add(doc);
 		
 			doc.setCurrentDirectory(new java.io.File("C:/Users/Tyler/Desktop"));
 			doc.setDialogTitle("Text Document Chooser");
 			doc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+			//((UIManager) doc).setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		
 			if(doc.showOpenDialog(doc) == JFileChooser.APPROVE_OPTION)
 				file = doc.getSelectedFile();
 		
 			System.out.println("You chose: " +doc.getSelectedFile().getAbsolutePath());
-		
+			 */
+			
+		//FileDialog
+			
+			fd = new FileDialog(frame, "Test", FileDialog.LOAD);
+            fd.setVisible(true);
+            System.out.println(fd.getFile());
+            String address = fd.getDirectory() + fd.getFile();
+            file = new File(address);
+			
+			
 		//File Reader
-			String text = FileReader.getFile(file);
+			String text = FileReader.setFile(file);
 			System.out.println(text);
 		
 		//Document Analyzer and Splitter

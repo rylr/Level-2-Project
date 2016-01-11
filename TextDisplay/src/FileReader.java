@@ -8,7 +8,7 @@ public class FileReader {
 	
 	BufferedReader bufferedReader;
 	
-	public static String getFile(File f) {
+	public static String setFile(File f) {
 		String output = "";
 		try {
 			output = new Scanner(f).useDelimiter("\\z").next();

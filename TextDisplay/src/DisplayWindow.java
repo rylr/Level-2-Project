@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -33,9 +34,8 @@ public class DisplayWindow implements ActionListener{
 		
 		//Text Display	
 			currentWord = new JLabel(wordList.get(0));
-			//dispanel.setLayout(null);
-			dispanel.add(currentWord);
-			//currentWord.setBounds(190, 0, 400, 400);
+			dispanel.setLayout(new BorderLayout());
+			dispanel.add(currentWord, BorderLayout.CENTER);
 			
 		//Timer
 			timer = new Timer((1000/y) * 60, this);
@@ -45,8 +45,7 @@ public class DisplayWindow implements ActionListener{
 			dispanel.setBackground(Color.BLACK);
 			currentWord.setForeground(Color.WHITE);
 			
-			//currentWord.setHorizontal(SwingConstants.CENTER);
-			currentWord.setVerticalAlignment( SwingConstants.CENTER );
+			currentWord.setHorizontalAlignment(SwingConstants.CENTER);
 			
 			currentWord.setFont(new Font("Arial", Font.PLAIN, 80));
 	}
