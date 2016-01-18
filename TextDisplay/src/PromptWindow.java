@@ -18,9 +18,10 @@ public class PromptWindow implements ActionListener {
 	JFrame frame;
 	JPanel panel;
 	JTextField speedSet;
+	JTextField textPaste;
 	JLabel speedInfo;
+	JLabel paste;
 	JButton run;
-	//JFileChooser doc;
 	FileDialog fd;
 	File file;
 	FileReader fr;
@@ -36,52 +37,54 @@ public class PromptWindow implements ActionListener {
 		//Speed and GUI
 			frame = new JFrame("Set your speed");
 			panel = new JPanel();
-			speedSet = new JTextField(5);
 			speedInfo = new JLabel();
+			speedSet = new JTextField(5);
+			paste = new JLabel();
+			textPaste = new JTextField(6000);
 		
 			frame.setVisible(true);
+			
+			panel.setLayout(null);	
+			
+			speedInfo.setBounds(10, 10, 350, 30);
+			speedSet.setBounds(360, 10, 80, 30);
+			paste.setBounds(10, 50, 500, 30);
+			textPaste.setBounds(320, 55, 470, 600);
+			
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+			//frame.setLocation(650, 450);
 		
 			frame.add(panel);
 			panel.add(speedInfo);
 			panel.add(speedSet);
+			panel.add(paste);
+			panel.add(textPaste);
 		
-			speedInfo.setText("Please set the word display speed in words per minute.");
-		
-		
-		//Run Button
+			speedInfo.setText("Please set the word display speed in words per minute:");
+			paste.setText("Or input desired text here if no file was selected: ");
+			
+			textPaste.setColumns(10);
+			
+			//JOptionPane
+			int result = JOptionPane.showConfirmDialog(null, "Do you want to display text from a file?", null, JOptionPane.YES_NO_OPTION);
+			
+			if(result == JOptionPane.YES_OPTION)
+			{
+				//FileDialog
+				fd = new FileDialog(frame, "Test", FileDialog.LOAD);
+	            fd.setVisible(true);
+	            System.out.println(fd.getFile());
+	            String address = fd.getDirectory() + fd.getFile();
+	            file = new File(address);
+			}
+			
+			//Run Button
 			run = new JButton("Run");
+			run.setBounds(100, 160, 80, 30);
 			panel.add(run);
-			frame.setSize(600, 100);
+			frame.setSize(800, 800);
 			
 			run.addActionListener(this);
-	
-			
-		//File Browser
-			/*
-			doc = new JFileChooser();
-			panel.add(doc);
-		
-			doc.setCurrentDirectory(new java.io.File("C:/Users/Tyler/Desktop"));
-			doc.setDialogTitle("Text Document Chooser");
-			doc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-			//((UIManager) doc).setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		
-			if(doc.showOpenDialog(doc) == JFileChooser.APPROVE_OPTION)
-				file = doc.getSelectedFile();
-		
-			System.out.println("You chose: " +doc.getSelectedFile().getAbsolutePath());
-			 */
-			
-		//FileDialog
-			
-			fd = new FileDialog(frame, "Test", FileDialog.LOAD);
-            fd.setVisible(true);
-            System.out.println(fd.getFile());
-            String address = fd.getDirectory() + fd.getFile();
-            file = new File(address);
-			
 			
 		//File Reader
 			String text = FileReader.setFile(file);
