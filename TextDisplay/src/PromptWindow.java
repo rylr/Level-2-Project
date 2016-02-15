@@ -32,6 +32,7 @@ public class PromptWindow implements ActionListener {
 	DisplayWindow pasteWindow;
 	int speed;
 	boolean input;
+	int result;
 	
 	public static void main(String[] args) {
 		PromptWindow r = new PromptWindow();
@@ -69,9 +70,10 @@ public class PromptWindow implements ActionListener {
 			
 			textPaste.setColumns(2);
 			textPaste.setRows(100);
+			textPaste.setLineWrap(true);
 		
 		//JOptionPane
-			int result = JOptionPane.showConfirmDialog(null, "Do you want to display text from a file?", null, JOptionPane.YES_NO_OPTION);
+			result = JOptionPane.showConfirmDialog(null, "Do you want to display text from a file?", null, JOptionPane.YES_NO_OPTION);
 		
 		//Run Button
 			run = new JButton("Run");
@@ -111,25 +113,11 @@ public class PromptWindow implements ActionListener {
 					
 					input = true;
 			}
+			
+
+			
 			else if(result == JOptionPane.NO_OPTION)
 			{
-				//Text Paste
-					String paste = textPaste.getText();
-					
-					String disPaste = "";
-					wordsPaste = new ArrayList<String>();
-					
-					for (int i = 0; i < paste.length(); i++) {
-						if(paste.charAt(i) == ' '||i == paste.length() - 1) {
-							wordsPaste.add(disPaste);
-							
-							disPaste = "";
-						}
-						else {
-							disPaste += paste.charAt(i);
-							System.out.println(paste.charAt(i));
-						}	
-					}
 					
 					input = false;
 			}
@@ -145,8 +133,30 @@ public class PromptWindow implements ActionListener {
 				window = new DisplayWindow(words, speed);
 			}
 			else if(input == false)
-			{
-				pasteWindow = new DisplayWindow(wordsPaste, speed);
+			{	
+				if(result == JOptionPane.NO_OPTION)
+				{
+					//Text Paste
+						String paste = textPaste.getText();
+						
+						String disPaste = "";
+						wordsPaste = new ArrayList<String>();
+						
+						for (int i = 0; i < paste.length(); i++) {
+							if(paste.charAt(i) == ' '||i == paste.length() - 1) {
+								wordsPaste.add(disPaste);
+								
+								disPaste = "";
+							}
+							else {
+								disPaste += paste.charAt(i);
+							}	
+						}
+						
+						input = false;
+						
+						pasteWindow = new DisplayWindow(wordsPaste, speed);
+				}
 			}
 
 			
