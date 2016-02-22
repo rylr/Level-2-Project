@@ -1,19 +1,18 @@
-import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FileDialog;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
 
 public class PromptWindow implements ActionListener {
 	JFrame frame;
@@ -57,7 +56,6 @@ public class PromptWindow implements ActionListener {
 			textPaste.setBounds(320, 55, 470, 600);
 			
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.setLocationRelativeTo(null);
 		
 			frame.add(panel);
 			panel.add(speedInfo);
@@ -74,6 +72,9 @@ public class PromptWindow implements ActionListener {
 		
 		//JOptionPane
 			result = JOptionPane.showConfirmDialog(null, "Do you want to display text from a file?", null, JOptionPane.YES_NO_OPTION);
+			
+			if(result == JOptionPane.CLOSED_OPTION)
+				System.exit(0);
 		
 		//Run Button
 			run = new JButton("Run");
@@ -81,9 +82,13 @@ public class PromptWindow implements ActionListener {
 			panel.add(run);
 			frame.setSize(800, 800);
 			
-			run.addActionListener(this);	
+			frame.setLocationRelativeTo(null);
 			
-		//TextPaste or File		
+			run.addActionListener(this);
+			
+			
+			
+		//File		
 			if(result == JOptionPane.YES_OPTION)
 			{
 				//FileDialog
@@ -102,20 +107,22 @@ public class PromptWindow implements ActionListener {
 					String distext = "";
 						
 					for (int i = 0; i < text.length(); i++) {
-						if(text.charAt(i) == ' '||i == text.length() - 1) {
+						if(text.charAt(i) == ' ') {
 							words.add(distext);
 							distext = "";
+						}
+						
+						if(i == text.length() - 1){
+							distext += text.charAt(i);
+							words.add(distext);
 						}
 						else {
 							distext += text.charAt(i);
 						}	
 					}
-					
 					input = true;
 			}
-			
-
-			
+		
 			else if(result == JOptionPane.NO_OPTION)
 			{
 					
@@ -143,16 +150,21 @@ public class PromptWindow implements ActionListener {
 						wordsPaste = new ArrayList<String>();
 						
 						for (int i = 0; i < paste.length(); i++) {
-							if(paste.charAt(i) == ' '||i == paste.length() - 1) {
+							
+							if(paste.charAt(i) == ' '){
 								wordsPaste.add(disPaste);
 								
 								disPaste = "";
+							}
+							
+							if(i == paste.length() - 1){
+								disPaste += paste.charAt(i);
+								wordsPaste.add(disPaste);
 							}
 							else {
 								disPaste += paste.charAt(i);
 							}	
 						}
-						
 						input = false;
 						
 						pasteWindow = new DisplayWindow(wordsPaste, speed);
