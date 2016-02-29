@@ -1,6 +1,6 @@
 # Level-2-Project
 
-Program: TextDisplay
+Program: TextDisplay 
 Creator: Tyler Reinecke
 
 Description: This program displays words at a user defined speed (Words/Minute) in the center of a window. You can 
