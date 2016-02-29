@@ -174,8 +174,6 @@ public class PromptWindow implements ActionListener {
 			
 			if(speedSet.getText().equals(""))
 				JOptionPane.showMessageDialog(null, "Please set a speed for your text display.");
-			
-			frame.dispose();
 		}
 	}
 }
